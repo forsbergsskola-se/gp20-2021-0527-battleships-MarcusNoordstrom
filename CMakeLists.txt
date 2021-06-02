@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.17)
-project(gp20_2021_0527_battleships_MarcusNoordstrom)
-
-set(CMAKE_CXX_STANDARD 14)
-
-add_executable(gp20_2021_0527_battleships_MarcusNoordstrom main.cpp)
