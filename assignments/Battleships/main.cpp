@@ -4,11 +4,24 @@
 int main() {
 
     GameField gameField{};
-    gameField.PlaceNormalShip(true);
-    gameField.PlaceNormalShip(true);
-    gameField.PlaceNormalShip(true);
-    gameField.PlaceNormalShip(true);
-    gameField.PlaceNormalShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+    gameField.PlaceMediumShip(true);
+
+
+
+
 
 
     return 0;
