@@ -1,28 +1,27 @@
 #include <iostream>
-#include "GameField.h"
+#include "Game.h"
 
 int main() {
-    GameField gameField{};
+    bool playerOne = false;
+    Game game{};
 
     //Player 1 initialize
-    gameField.PlaceSmallShip(true);
-    gameField.PlaceSmallShip(true);
-
-    gameField.PlaceNormalShip(true);
-    gameField.PlaceMediumShip(true);
-    gameField.PlaceBigShip(true);
+    game.PlaceSmallShip(true);
+    game.PlaceSmallShip(true);
+    game.PlaceNormalShip(true);
+    game.PlaceMediumShip(true);
+    game.PlaceBigShip(true);
 
     //Player 2 initialize
-    gameField.PlaceSmallShip(false);
-    gameField.PlaceSmallShip(false);
+    game.PlaceSmallShip(false);
+    game.PlaceSmallShip(false);
+    game.PlaceNormalShip(false);
+    game.PlaceMediumShip(false);
+    game.PlaceBigShip(false);
 
-    gameField.PlaceNormalShip(false);
-    gameField.PlaceMediumShip(false);
-    gameField.PlaceBigShip(false);
-
-
-
-
-
-    return 0;
+    //BATTLE TO THE LAST SHIP!!!
+    while(true){
+        playerOne = !playerOne;
+        game.Attack(playerOne);
+    }
 }

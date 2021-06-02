@@ -3,4 +3,4 @@ project(Battleships)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Battleships main.cpp GameField.cpp)
+add_executable(Battleships main.cpp Game.cpp)

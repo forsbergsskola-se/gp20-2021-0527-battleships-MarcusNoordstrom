@@ -2,7 +2,7 @@
 // Created by Bulten on 2021-06-02.
 //
 
-#include "GameField.h"
+#include "Game.h"
 #include <iostream>
 #include "string"
 using namespace std;
@@ -12,7 +12,178 @@ char IntToAlphabet( int i )
     return static_cast<char>('A' - 1 + i);
 }
 
-void GameField::DisplayPlayerField(bool playerOne){
+void Game::Win(int player) {
+    if(player == 1){
+        cout << "Player 1 wins!" << endl;
+        exit(-0);
+    }
+    else{
+        cout << "Player 2 wins!" << endl;
+        exit(-0);
+    }
+}
+
+void Game::CheckIfShipSunk(int player, int shipType) {
+    int shipParts = 0;
+
+    auto field = pOneField;
+    int total = 0;
+
+    if(player == 1){
+        field = pTwoField;
+    }
+    else{
+        field = pOneField;
+    }
+
+    for(int x = 0; x < 10; x++){
+        for(int y = 0; y < 10; y++){
+            total += field[x][y];
+            if(field[x][y] == shipType){
+                shipParts += 1;
+            }
+        }
+    }
+
+    if(total == 0){
+        Win(player);
+    }
+
+    if(player == 1){
+        if(shipType == 2){
+            if(shipParts == 2 || shipParts == 0){
+                cout << "Player 2 lost a small ship!" << endl;
+            }
+        }
+
+        if(shipType == 3){
+            if(shipParts == 0){
+                cout << "Player 2 lost a normal ship!" << endl;
+            }
+        }
+
+        if(shipType == 4){
+            if(shipParts == 0){
+                cout << "Player 2 lost a medium ship!" << endl;
+            }
+        }
+        if(shipType == 5){
+            if(shipParts == 0){
+                cout << "Player 2 lost a big ship!" << endl;
+            }
+        }
+    }
+    else{
+        if(shipType == 2){
+            if(shipParts == 2 || shipParts == 0){
+                cout << "Player 1 lost a small ship!" << endl;
+            }
+        }
+
+        if(shipType == 3){
+            if(shipParts == 0){
+                cout << "Player 1 lost a normal ship!" << endl;
+            }
+        }
+
+        if(shipType == 4){
+            if(shipParts == 0){
+                cout << "Player 1 lost a medium ship!" << endl;
+            }
+        }
+        if(shipType == 5){
+            if(shipParts == 0){
+                cout << "Player 1 lost a big ship!" << endl;
+            }
+        }
+    }
+}
+
+void Game::Attack(bool playerOne){
+    DisplayPlayerField(playerOne);
+
+    int p;
+    if(playerOne){
+        p = 1;
+    }
+    else{
+        p = 2;
+    }
+
+    cout << "Player " << p <<  " Input A0 - J9 , you see you're own board for reference" << endl;
+    string input;
+    cin >> input;
+
+    char xPlayerInput = toupper(input[0]);
+    int yPlayerInput = input[1] - '0';
+
+    if(playerOne){
+        for(int i = 0; i < 10; i++) {
+            if (xInput[i] == xPlayerInput) {
+                if(pTwoField[i][yPlayerInput] != 0) {
+                    int whatDidWeHit = pTwoField[i][yPlayerInput];
+                    if(whatDidWeHit == 2){
+                        cout << "Player 1 hit small ship!" << endl;
+                        pTwoField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(1, 2);
+                    }
+                    else if(whatDidWeHit == 3){
+                        cout << "Player 1 hit normal ship!" << endl;
+                        pTwoField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(1, 3);
+                    }
+                    else if(whatDidWeHit == 4){
+                        cout << "Player 1 hit medium ship!" << endl;
+                        pTwoField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(1, 4);
+                    }
+                    else if(whatDidWeHit == 5){
+                        cout << "Player 1 hit big ship!" << endl;
+                        pTwoField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(1, 5);
+                    }
+                }
+                else{
+                    cout << "Player 1 misses..." << endl;
+                }
+            }
+        }
+    }
+    else{
+        for(int i = 0; i < 10; i++) {
+            if (xInput[i] == xPlayerInput) {
+                if(pOneField[i][yPlayerInput] != 0) {
+                    int whatDidWeHit = pOneField[i][yPlayerInput];
+                    if(whatDidWeHit == 2){
+                        cout << "Player 2 hit small ship!" << endl;
+                        pOneField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(2, 2);
+                    }
+                    else if(whatDidWeHit == 3){
+                        cout << "Player 2 hit normal ship!" << endl;
+                        pOneField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(2, 3);
+                    }
+                    else if(whatDidWeHit == 4){
+                        cout << "Player 2 hit medium ship!" << endl;
+                        pOneField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(2, 4);
+                    }
+                    else if(whatDidWeHit == 5){
+                        cout << "Player 2 hit big ship!" << endl;
+                        pOneField[i][yPlayerInput] = 0;
+                        CheckIfShipSunk(2, 5);
+                    }
+                }
+                else{
+                    cout << "Player 2 misses..." << endl;
+                }
+            }
+        }
+    }
+}
+
+void Game::DisplayPlayerField(bool playerOne){
     cout << "  0123456789" << endl;
     cout << "  ||||||||||" << endl;
 
@@ -40,7 +211,7 @@ void GameField::DisplayPlayerField(bool playerOne){
     cout << endl;
 }
 
-void GameField::PlaceSmallShip(bool playerOne) {
+void Game::PlaceSmallShip(bool playerOne) {
     DisplayPlayerField(playerOne);
 
     if(playerOne){
@@ -118,7 +289,7 @@ void GameField::PlaceSmallShip(bool playerOne) {
     }
 }
 
-void GameField::PlaceNormalShip(bool playerOne) {
+void Game::PlaceNormalShip(bool playerOne) {
     DisplayPlayerField(playerOne);
 
     if(playerOne){
@@ -200,7 +371,7 @@ void GameField::PlaceNormalShip(bool playerOne) {
     }
 }
 
-void GameField::PlaceMediumShip(bool playerOne) {
+void Game::PlaceMediumShip(bool playerOne) {
     DisplayPlayerField(playerOne);
 
     if(playerOne){
@@ -286,7 +457,7 @@ void GameField::PlaceMediumShip(bool playerOne) {
     }
 }
 
-void GameField::PlaceBigShip(bool playerOne) {
+void Game::PlaceBigShip(bool playerOne) {
     DisplayPlayerField(playerOne);
 
     if(playerOne){
