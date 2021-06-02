@@ -21,6 +21,4 @@ private:
     char xInput[10]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 };
 
-
-
 #endif //BATTLESHIPS_GAME_H

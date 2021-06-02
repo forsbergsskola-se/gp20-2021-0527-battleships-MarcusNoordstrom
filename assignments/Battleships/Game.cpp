@@ -7,8 +7,7 @@
 #include "string"
 using namespace std;
 
-char IntToAlphabet( int i )
-{
+char IntToAlphabet( int i ){
     return static_cast<char>('A' - 1 + i);
 }
 
