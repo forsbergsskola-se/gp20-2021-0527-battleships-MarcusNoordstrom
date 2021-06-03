@@ -183,16 +183,16 @@ void Game::Attack(bool playerOne){
 }
 
 void Game::DisplayPlayerField(bool playerOne){
-    cout << "  0123456789" << endl;
-    cout << "  ||||||||||" << endl;
+    cout << "   0  1  2  3  4  5  6  7  8  9" << endl;
+    cout << "   |  |  |  |  |  |  |  |  |  |" << endl;
 
     if(playerOne)
         for (int x = 0; x < 10; x++)
         {
-            cout << IntToAlphabet(x + 1) << '|';
+            cout << IntToAlphabet(x + 1) << " |";
             for(int y = 0; y < 10; y++)
             {
-                cout << pOneField[x][y];
+                cout << " " << pOneField[x][y] << " ";
             }
             cout << endl;
         }
