@@ -1,12 +1,13 @@
 #include <iostream>
 #include <ctime>
-#include <bits/stdc++.h>
 
+//Gets a random number.
 int GetRandomNumber(int start, int end){
     return rand() % end + start;
 }
 
-int CheckNo(int numbers[1000],int nCheck){
+//Checks for occurrences in numbers for nCheck.
+int CheckNo(const int numbers[1000],int nCheck){
     int count = 0;
     for(int i = 0; i < 1000; i++){
         if(numbers[i] == nCheck){
@@ -15,16 +16,20 @@ int CheckNo(int numbers[1000],int nCheck){
     }
     return count;
 }
+
+//Our numbers
 int numbers [1000];
+
+//Generate all numbers randomly.
 void GenerateNumbers(){
-    for(int i = 0; i < 1000; i++){
+    for(int & number : numbers){
         int toAdd = GetRandomNumber(1, 20);
-        numbers[i] = toAdd;
+        number = toAdd;
     }
 }
 
-void CheckAllNumbers(int n[1000]){
-
+//Check all numbers occurrences and their total percentage of 1000
+void CheckAllNumbers(){
     std::cout << "Using RAND + random seed. 1000 different numbers" << std::endl;
     std::cout << "||||||||||||||||||||||||||||||||||||||||||||||||" << std::endl;
     for(int i = 1; i < 21; i++){
@@ -39,11 +44,11 @@ void CheckAllNumbers(int n[1000]){
 
 int main() {
     //Sets a random seed.
-    srand(time(0));
+    srand(time(nullptr));
     //Generates 1000 numbers.
     GenerateNumbers();
     //Checks occurrences.
-    CheckAllNumbers(numbers);
+    CheckAllNumbers();
 
     return 0;
 }
